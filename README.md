@@ -1,3 +1,34 @@
+Certainly! I will guide you through deploying the ShopiTry e-commerce application on AWS based on the repository structure and deployment documentation. The main contents of the guide are as follows:
+
+## 🏗️ Application Architecture Overview
+
+```mermaid
+flowchart LR
+    A[Users] --> B[CloudFront CDN]
+    B --> C[S3 Storefront<br/>store.shopitry.com]
+    B --> D[S3 Admin Dashboard<br/>admin.shopitry.com]
+    B --> E[API Gateway<br/>api.shopitry.com]
+    
+    E --> F[Gateway Service<br/>EC2 Port 5000]
+    
+    F --> G[Catalog Service<br/>EC2 Port 5001]
+    F --> H[Cart Service<br/>EC2 Port 5002]
+    F --> I[Order Service<br/>EC2 Port 5003]
+    F --> J[Payment Service<br/>Lambda]
+    F --> K[Notification Service<br/>Lambda]
+    
+    G --> L[(MongoDB Atlas<br/>catalog_db)]
+    H --> M[(MongoDB Atlas<br/>cart_db)]
+    I --> N[(MongoDB Atlas<br/>orders_db)]
+```
+### **Quick Navigation**
+- [🔄 Phase 1: MongoDB Atlas Configuration](#phase-1-mongodb-atlas-configuration)
+- [🔒 Phase 2: AWS Lambda IAM Role](#phase-2-aws-lambda-iam-role)
+- [🌐 Phase 3: API Gateway Configuration](#phase-3-api-gateway-configuration)
+- [🧩 Phase 4: EC2 Microservices (.env Files)](#phase-4-ec2-microservices-env-files)
+- [🚀 Phase 5: CloudFront & ACM Certificate](#phase-5-cloudfront--acm-certificate)
+- [🧭 Phase 6: Route 53 DNS Configuration](#phase-6-route-53-dns-configuration)
+- [🧪 Phase 7: Final Verification](#phase-7-final-verification)
 
 
 ## 🎯 **Quick Reference: What You Need to Change**
@@ -16,33 +47,6 @@ Here's a high-level overview of all the customizations required. We'll dive into
 
 
 
-flowchart LR
-    A[Users] --> B[CloudFront CDN]
-    B --> C[S3 Storefront<br/>store.shopitry.com]
-    B --> D[S3 Admin Dashboard<br/>admin.shopitry.com]
-    B --> E[API Gateway<br/>api.shopitry.com]
-    
-    E --> F[Gateway Service<br/>EC2 Port 5000]
-    
-    F --> G[Catalog Service<br/>EC2 Port 5001]
-    F --> H[Cart Service<br/>EC2 Port 5002]
-    F --> I[Order Service<br/>EC2 Port 5003]
-    F --> J[Payment Service<br/>Lambda]
-    F --> K[Notification Service<br/>Lambda]
-    
-    G --> L[(MongoDB Atlas<br/>catalog_db)]
-    H --> M[(MongoDB Atlas<br/>cart_db)]
-    I --> N[(MongoDB Atlas<br/>orders_db)]
----
-
-### **Quick Navigation**
-- [🔄 Phase 1: MongoDB Atlas Configuration](#phase-1-mongodb-atlas-configuration)
-- [🔒 Phase 2: AWS Lambda IAM Role](#phase-2-aws-lambda-iam-role)
-- [🌐 Phase 3: API Gateway Configuration](#phase-3-api-gateway-configuration)
-- [🧩 Phase 4: EC2 Microservices (.env Files)](#phase-4-ec2-microservices-env-files)
-- [🚀 Phase 5: CloudFront & ACM Certificate](#phase-5-cloudfront--acm-certificate)
-- [🧭 Phase 6: Route 53 DNS Configuration](#phase-6-route-53-dns-configuration)
-- [🧪 Phase 7: Final Verification](#phase-7-final-verification)
 
 ---
 
